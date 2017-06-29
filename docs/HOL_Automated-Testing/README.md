@@ -119,7 +119,7 @@ The development environment is now set up, and you should be ready to make write
 
 ![](media/gradle_build_console.png)
 
-###2. Add JUnit tests to Parts Unlimited MRP App###
+### 2. Add JUnit tests to Parts Unlimited MRP App ###
 
 This task will focus on creating a unit test to test a part of the Parts Unlimited App.
 
@@ -175,7 +175,7 @@ The final result should look something like this:
 
 You should now be able to see that the test in the JUnit Window.
 
-### 3. Run the automated tests in an automated build###
+### 3. Run the automated tests in an automated build ###
 
 Now that we have the automated tests written, and successfully running, it's important we push the new tests to the shared repository. This will allow other team members to benefit from the automated test and give the automated build more verification that our code is working as expected.
 
