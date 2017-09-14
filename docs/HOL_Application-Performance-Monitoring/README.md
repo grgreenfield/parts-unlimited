@@ -163,7 +163,7 @@ the timeline. The timeline data may not show up immediately, so you will want to
 
 ![](<media/performance-step9.png>)
 
-**Step 12.** Return to the Application Insights performance monitoring view in the Azure Preview Portal and refresh the page. The **Do my slowest operations correlate?** will show the the new requests with a better response times. 
+**Step 12.** Return to the Application Insights performance monitoring view in the Azure Preview Portal and refresh the page. The **Do my slowest operations correlate?** will show the new requests with a better response times. 
 
 In this lab, you learned how to set up Application Insights telemetry, and drill down into performance
 monitoring data through Application Insights in the new Azure Portal.
