@@ -18,51 +18,62 @@ You may watch a [demo in Channel 9](https://channel9.msdn.com/Series/Parts-Unlim
 
 **Tasks Overview**
 
-1. Set up Application Insights for PartsUnlimitedMRP
+1. Set up Application Insights resources for PartsUnlimitedMRP
 
-2. Using Application Performance Monitoring to resolve performance issues
+2. Configure Application Insights to record from your PartsUnlimitedMRP
+
+3. Resolve performance issues that have been found
 
 ### Task 1: Create the Application Insights Resource on Azure
 **Step 1.** In an Internet browser, navigate to <http://portal.azure.com> and
 sign in with your credentials.
 
-![](<media/prereq-step1.png>)
+![](<media/creation-step1.png>)
 
-**Step 2.** Click on the “+ New” tile on the left column, Search for
-“Application Insights,” and click on the first result "Application Insights (preview)"
+**Step 2.** Click on the "+ New" tile on the left column, select the "Monitoring + Management" option in
+the azure marketplace and then "Application Insights". 
 
-![](<media/creation_AppInsight.png>)
+Alternatively after clicking on the "+ New" in the left column, search for
+“Application Insights,” and click on the first result "Application Insights"
 
-**Step 3.** Fill the information asked, choose the Application Type for "Java web application". We recommand to deploy this resource in the same Resource Group that you choose for the virtual machine in the previous HOL.
+![](<media/creation-step2.png>)
 
-![](<media/creation_AppInsight2.png>)
+**Step 3.** Fill the information asked, choose "Java web application" as the Application Type. We recommend to deploy this resource in the same Resource Group that you have chosen for the virtual machine in the previous HOL. When completed select the "Create" button.
 
-### Task 2: Set up Application Insights for PartsUnlimitedMRP
-**Step 1.** Still from the Azure Portal : <http://portal.azure.com> 
+![](<media/creation-step3.png>)
 
-![](<media/prereq-step1.png>)
+### Task 2: Configure your new Application Insights for PartsUnlimitedMRP
+**Step 1.** Starting from the Azure Portal : <http://portal.azure.com> 
 
-**Step 3.** Open you Application Insights telemetry service previsously created for PartsUnlimitedMRP, select the Settings tile, followed by the Properties tile to find the Instrumentation key. 
+**Step 2.** Open you Application Insights telemetry service previously created for PartsUnlimitedMRP. This
+can be done by selecting "All resources" on the left hand navigation and then clicking what you have named your Application Insights. 
+Or, if you have the "All resources" clipped to your dashboard then you can click directly into it from there. 
 
-![](<media/prereq-step3.png>)
+![](<media/app-insights-step1.png>)
 
-**Step 4.** Copy the Instrumentation Key in the Properties panel. You will need this when inserting the key into the ApplicationInsights.xml file in PartsUnlimitedMRP's resources folder. 
+![](<media/app-insights-step2.png>)
 
-![](<media/prereq-step4.png>)
+With the "Application Insights" now open, scroll down in the option and click on the Properties tile to find the Instrumentation key. 
 
-**Step 5.** Navigate to the working folders of the PartsUnlimitedMRP repo in a code editor (such as VSCode). 
+![](<media/app-insights-step3.png>)
 
-![](<media/prereq-step5.png>)
+**Step 3.** Copy the Instrumentation Key in the Properties panel. You will need this when inserting the key into the ApplicationInsights.xml file in PartsUnlimitedMRP's resources folder. 
 
-**Step 6.** In `PartsUnlimitedMRP/src/Backend/OrderService/build.gradle`, confirm that the build file is importing `com.microsoft.appinsights.*` and is also compiling `com.microsoft.azure:applicationinsights-core:1.n`.
+![](<media/app-insights-step4.png>)
 
-![](<media/prereq-step6.png>)
+**Step 4.** Navigate to the working folders of the PartsUnlimitedMRP repo in a code editor (such as VSCode). 
 
-**Step 7.** In `PartsUnlimitedMRP/src/OrderService/src/main/resources/ApplicationInsights.xml`, paste in the instrumentation key that you copied previously from the Azure Portal in between the `<InstrumentationKey>` tags. 
+![](<media/app-insights-step5.png>)
 
-![](<media/prereq-step7.png>)
+**Step 5.** In `PartsUnlimitedMRP/src/Backend/OrderService/build.gradle`, confirm that the build file is importing `com.microsoft.appinsights.*` and is also compiling `com.microsoft.azure:applicationinsights-core:1.n`.
 
-**Step 8.** Additionally, verify that the following telemetry modules and telemetry initializers exist in between the `<TelemetryModules>` and `<TelemetryIntializers>` tags. 
+![](<media/app-insights-step6.png>)
+
+**Step 6.** In `PartsUnlimitedMRP/src/OrderService/src/main/resources/ApplicationInsights.xml`, paste in the instrumentation key that you copied previously from the Azure Portal in between the `<InstrumentationKey>` tags. 
+
+![](<media/app-insights-step7.png>)
+
+**Step 7.** Additionally, verify that the following telemetry modules and telemetry initializers exist in between the `<TelemetryModules>` and `<TelemetryIntializers>` tags. 
 
 Telemetry Modules:  
 
@@ -78,15 +89,15 @@ Telemetry Initializers:
     <Add type="com.microsoft.applicationinsights.web.extensibility.initializers.WebUserTelemetryInitializer"/>
     <Add type="com.microsoft.applicationinsights.web.extensibility.initializers.WebUserAgentTelemetryInitializer"/>
 
-![](<media/prereq-step8.png>)
+![](<media/app-insights-step8.png>)
 
-**Step 9.** Return to the Azure Portal and under the Application Insights telemetry for PartsUnlimitedMRP, click on the tile in the overview timeline for application health, "Learn how to collect browser page load data." Once you click on it, a new panel should open that shows the end-user usage analytics code. Copy lines 8 through 17 (the script itself). 
+**Step 8.** Return to the Azure Portal and under the Application Insights telemetry for PartsUnlimitedMRP, click on the tile in the overview timeline for application health, "Learn how to collect browser page load data." Once you click on it, a new panel should open that shows the end-user usage analytics code. Copy lines the script code outlined in green (all of it including the `<script>` tags). 
 
-![](<media/prereq-step9.png>)
+![](<media/app-insights-step11.png>)
 
-**Step 10.** Back in the code editor, we will want to insert the script code previously copied before the end of the `<HEAD>` tag for each of the HTML pages in PartsUnlimitedMRP, starting with the index page. In `PartsUnlimitedMRP/src/Clients/Web/index.html`, paste the script code before the other scripts inside of the `<HEAD>` tag. 
+**Step 9.** Back in the code editor, we will want to insert the script code previously copied before the end of the `<HEAD>` tag for each of the HTML pages in PartsUnlimitedMRP, starting with the index page. In `PartsUnlimitedMRP/src/Clients/Web/index.html`, paste the script code before the other scripts inside of the `<HEAD>` tag. 
 
-![](<media/prereq-step10.png>)
+![](<media/app-insights-step12.png>)
 
 **Step 10.** Repeat step 10 for the following HTML files:
 
@@ -98,65 +109,61 @@ Telemetry Initializers:
 
 **Step 11.** Commit and push the changes to kick off the Continuous Integration build with Gradle. 
 
-![](<media/prereq-step11.png>)
+![](<media/app-insights-step13.png>)
 
-![](<media/prereq-step11b.png>)
+![](<media/app-insights-step14.png>)
 
 **Step 12.** Return to the Azure Portal into the PartsUnlimitedMRP Application Insights telemetry to find data available for browser page loading and dependency durations. It may take a few moments for Application Insights to reload.
 
-![](<media/prereq-step12.png>)
+![](<media/app-insights-step14.png>)
 
 ### Task 3: Using Application Performance Monitoring to resolve performance issues
 
-**Step 1.** In an Internet browser, navigate to the PartsUnlimitedMRP website that you previously deployed and go to the Dealers page. You'll notice immediately that the page takes a while for the dealers to load on the left-hand side. 
+**Step 1.** In an Internet browser, navigate to the PartsUnlimitedMRP website (e.g. http://mylinuxvm.westus.cloudapp.azure.com:9080/mrp) this is the VM you previously deployed to and navigate to the Dealers page. You'll notice immediately that the page takes a while for the dealers view to load. 
 
-![](<media/step1.png>)
+![](<media/performance-step1.png>)
 
-**Step 2.** Click on the “Browse All” tile on the left column, select
-“Application Insights,” and click on the name of your Application Insights
-telemetry for your web app.
+**Step 2.** Re-navigate to your Application Insights resource by selecting "All resources" on the left hand navigation and then clicking what you have named your Application Insights. 
+Or, if you have the "All resources" clipped to your dashboard then you can click directly into it from there. 
 
-![](<media/prereq-step2.png>)
+![](<media/performance-step2.png>)
 
 **Step 3.** After selecting the Application Insights telemetry for your web app,
 scroll down and select the “Performance” tile to view performance monitoring
 information.
 
-![](<media/step3.png>)
-
 **Step 4.** In the performance tile of the Application Insights telemetry, note
 the timeline. The timeline data may not show up immediately, so you will want to wait for a few minutes for the telemetry to collect performance data. 
 
-![](<media/view_dealers_app_insights.png>)
+![](<media/performance-step3.png>)
 
-**Step 5.** Once data shows in the timeline, view the operations listed under the **Average
-of server response time by operation name** section under the timeline. Click on the top operation in the list referring to the Dealers page to view details of that operation.
+**Step 5.** Once data shows in the timeline, you will be able to view great information in the **Do my slowest operations correlate?** section. Under the heading **What are my slowest operations?** you can see that the dealers page took the longest to load. By clicking on the /dealer you are able to view further information on what has happened.
+
+![](<media/performance-step4.png>)
 
 **Step 6.** Drill down into the method that is affecting the slow performance. We now know that the slow performance is being caused by the DealersController in our code and that this is causing inefficient database calls. 
 
 **Step 7.** Navigate to the working folders of the PartsUnlimitedMRP repo in a code editor (such as VSCode). 
 
-![](<media/prereq-step5.png>)
+![](<media/performance-step5.png>)
 
 **Step 8.** Find the `getDealers()` method in `PartsUnlimitedMRP/src/Backend/OrderService/src/main/java/smpl/ordering/controllers/DealerController.java` that is causing slow performance.
 
-![](<media/step8.png>)
+![](<media/performance-step6.png>)
 
 **Step 9.** In the `getDealers()` method, notice that there is a database call 100000 times with the variable, `numMongoDBCalls`. Change the value of this variable to be 1 so that there is only one call to the database to populate the dealers list. 
 
-![](<media/step9.png>)
+![](<media/performance-step7.png>)
 
 **Step 10.** Save the changes and commit the changes on the master branch. Push the changes to the remote repo in VSO to kick off a Continuous Integration build. 
 
-![](<media/step10.png>)
+![](<media/performance-step8.png>)
 
-![](<media/prereq-step11b.png>)
+**Step 11.** After the changes have been deployed to the website (This will take a few moments), open up a new incognito browser window (to prevent caching) and return to the Dealers page. The dealers will show up faster than they did previously now having one call to the database. 
 
-**Step 11.** Now that our changes have deployed to the website, open up a new incognito browser window (to prevent caching) and return to the Dealers page. The dealers will show up faster than they did previously now having one call to the database. 
+![](<media/performance-step9.png>)
 
-![](<media/step1.png>)
-
-**Step 12.** Return to the Application Insights performance monitoring view in the Azure Preview Portal and refresh the page. The **Average of server response time by operation name** overview should not be showing the `getDealers()` method.
+**Step 12.** Return to the Application Insights performance monitoring view in the Azure Preview Portal and refresh the page. The **Do my slowest operations correlate?** will show the the new requests with a better response times. 
 
 In this lab, you learned how to set up Application Insights telemetry, and drill down into performance
 monitoring data through Application Insights in the new Azure Portal.
