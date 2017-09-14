@@ -38,22 +38,22 @@ Alternatively after clicking on the "+ New" in the left column, search for
 
 ![](<media/creation-step2.png>)
 
-**Step 3.** Fill the information asked, choose "Java web application" as the Application Type. We recommend to deploy this resource in the same Resource Group that you have chosen for the virtual machine in the previous HOL. When completed select the "Create" button.
+**Step 3.** Fill the information asked, choose "Java web application" as the Application Type. We recommend deploying this resource in the same Resource Group that you have chosen for the virtual machine in the previous HOL. When completed, select the "Create" button.
 
 ![](<media/creation-step3.png>)
 
 ### Task 2: Configure your new Application Insights for PartsUnlimitedMRP
 **Step 1.** Starting from the Azure Portal : <http://portal.azure.com> 
 
-**Step 2.** Open you Application Insights telemetry service previously created for PartsUnlimitedMRP. This
+**Step 2.** Open your Application Insights telemetry service previously created for PartsUnlimitedMRP. This
 can be done by selecting "All resources" on the left hand navigation and then clicking what you have named your Application Insights. 
-Or, if you have the "All resources" clipped to your dashboard then you can click directly into it from there. 
+Or, if you have the "All resources" clipped to your dashboard, then you can click directly into it from there. 
 
 ![](<media/app-insights-step1.png>)
 
 ![](<media/app-insights-step2.png>)
 
-With the "Application Insights" now open, scroll down in the option and click on the Properties tile to find the Instrumentation key. 
+With the "Application Insights" now open, scroll down in Options and click on the Properties tile to find the Instrumentation key. 
 
 ![](<media/app-insights-step3.png>)
 
@@ -91,11 +91,11 @@ Telemetry Initializers:
 
 ![](<media/app-insights-step8.png>)
 
-**Step 8.** Return to the Azure Portal and under the Application Insights telemetry for PartsUnlimitedMRP, click on the tile in the overview timeline for application health, "Learn how to collect browser page load data." Once you click on it, a new panel should open that shows the end-user usage analytics code. Copy lines the script code outlined in green (all of it including the `<script>` tags). 
+**Step 8.** Return to the Azure Portal. Under the Application Insights telemetry for PartsUnlimitedMRP, click on the tile in the overview timeline for application health, "Learn how to collect browser page load data." Once you click on it, a new panel should open that shows the end-user usage analytics code. Copy lines the script code outlined in green (including the `<script>` tags). 
 
 ![](<media/app-insights-step11.png>)
 
-**Step 9.** Back in the code editor, we will want to insert the script code previously copied before the end of the `<HEAD>` tag for each of the HTML pages in PartsUnlimitedMRP, starting with the index page. In `PartsUnlimitedMRP/src/Clients/Web/index.html`, paste the script code before the other scripts inside of the `<HEAD>` tag. 
+**Step 9.** Back in the code editor, insert the script code previously copied before the end of the `<HEAD>` tag for each of the HTML pages in PartsUnlimitedMRP, starting with the index page. In `PartsUnlimitedMRP/src/Clients/Web/index.html`, paste the script code before the other scripts inside of the `<HEAD>` tag. 
 
 ![](<media/app-insights-step12.png>)
 
@@ -119,7 +119,7 @@ Telemetry Initializers:
 
 ### Task 3: Using Application Performance Monitoring to resolve performance issues
 
-**Step 1.** In an Internet browser, navigate to the PartsUnlimitedMRP website (e.g. http://mylinuxvm.westus.cloudapp.azure.com:9080/mrp) this is the VM you previously deployed to and navigate to the Dealers page. You'll notice immediately that the page takes a while for the dealers view to load. 
+**Step 1.** In an Internet browser, navigate to the PartsUnlimitedMRP website (e.g. http://mylinuxvm.westus.cloudapp.azure.com:9080/mrp). This is the VM you previously deployed to. Navigate to the Dealers page. You'll notice immediately that the page takes a while for the dealers view to load. 
 
 ![](<media/performance-step1.png>)
 
@@ -133,7 +133,7 @@ scroll down and select the “Performance” tile to view performance monitoring
 information.
 
 **Step 4.** In the performance tile of the Application Insights telemetry, note
-the timeline. The timeline data may not show up immediately, so you will want to wait for a few minutes for the telemetry to collect performance data. 
+the timeline. The timeline data may not show up immediately, so you may want to wait for a few minutes for the telemetry to collect performance data. 
 
 ![](<media/performance-step3.png>)
 
@@ -159,7 +159,7 @@ the timeline. The timeline data may not show up immediately, so you will want to
 
 ![](<media/performance-step8.png>)
 
-**Step 11.** After the changes have been deployed to the website (This will take a few moments), open up a new incognito browser window (to prevent caching) and return to the Dealers page. The dealers will show up faster than they did previously now having one call to the database. 
+**Step 11.** After the changes have been deployed to the website (This will take a few moments), open up a new incognito browser window (to prevent caching) and return to the Dealers page. The dealers will show up faster than they did previously now having only one call to the database. 
 
 ![](<media/performance-step9.png>)
 
@@ -182,4 +182,4 @@ monitoring data through Application Insights in the new Azure Portal.
 
 [If you are encountering some issues or questions during this Hands on Labs, please open an issue by clicking here](https://github.com/Microsoft/PartsUnlimitedMRP/issues)
 
-Thanks
+Thank you
