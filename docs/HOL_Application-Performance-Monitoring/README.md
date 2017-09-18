@@ -24,6 +24,8 @@ You may watch a [demo in Channel 9](https://channel9.msdn.com/Series/Parts-Unlim
 
 3. Resolve performance issues that have been found
 
+4. Introduction into live metrics 
+
 ### Task 1: Create the Application Insights Resource on Azure
 **Step 1.** In an Internet browser, navigate to <http://portal.azure.com> and
 sign in with your credentials.
@@ -164,6 +166,18 @@ the timeline. The timeline data may not show up immediately, so you may want to 
 ![](<media/performance-step9.png>)
 
 **Step 12.** Return to the Application Insights performance monitoring view in the Azure Preview Portal and refresh the page. The **Do my slowest operations correlate?** will show the new requests with a better response times. 
+
+### Task 4: Introduction into Live metrics
+
+**Step 1.** Return to the Application Insights overview page you will see by default you will already have 1 server linked to the Live stream. By clicking this you will be taken through to the Live Metrics Stream. 
+
+![](<media/live-step1.png>)
+
+**Step 2.** The best part of this is it is setup for you already. In this view you are able to see all of the servers that are providing information for the metrics. 
+
+This gives you access to be able to see live what is happening to in PartsUnlimitedMRP and the servers you have running. Showing issues that could be occurring on your live site, including the overall health of the serves. 
+
+![](<media/live-step2.png>)
 
 In this lab, you learned how to set up Application Insights telemetry, and drill down into performance
 monitoring data through Application Insights in the new Azure Portal.
