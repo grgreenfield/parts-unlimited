@@ -11,14 +11,8 @@ pe_version=$1
 console_pw=$2
 
 # Configure for Puppet Enterprise version
-case $pe_version in
-    2016.2.0)
-        pe_url=https://pm.puppetlabs.com/puppet-enterprise/2016.2.0/puppet-enterprise-2016.2.0-ubuntu-12.04-amd64.tar.gz
-        ;;
-    *)
-        pe_url=https://pm.puppetlabs.com/puppet-enterprise/2016.2.0/puppet-enterprise-2016.2.0-ubuntu-12.04-amd64.tar.gz
-        ;;
-esac
+pe_url=https://pm.puppetlabs.com/puppet-enterprise/2017.1.0/puppet-enterprise-2017.1.0-ubuntu-12.04-amd64.tar.gz
+
 
 # Set up variables
 pe_tar=${pe_url##*/}

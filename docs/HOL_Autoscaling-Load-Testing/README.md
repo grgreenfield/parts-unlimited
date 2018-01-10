@@ -11,7 +11,7 @@ In this lab, you will learn how to perform load testing against an endpoint for 
 
 **Pre-requisites**
 
-- The PartsUnlimitedMRP Linux Azure virtual machine set up and deployed with endpoint 9080 open (see [link](https://github.com/Microsoft/PartsUnlimitedMRP/blob/master/docs/Build-MRP-App-Linux.md))
+- The PartsUnlimitedMRP Linux Azure virtual machine set up and deployed with endpoint 9080 open (see [link](https://github.com/Microsoft/PartsUnlimitedMRP/blob/master/docs/Build-MRP-App-Linux.md)) this would be setup through Continuous Deployment (viewable [here](https://github.com/Microsoft/PartsUnlimitedMRP/tree/master/docs/HOL_Continuous-Deployment))
 
 - Visual Studio Ultimate license
 
@@ -30,28 +30,29 @@ Performing a load test can be done in Visual Studio, in a browser in Visual Stud
 
     https://{VSTS instance}.visualstudio.com
 
-On the upper-left set of tabs, click on "Load test" to open up load test options in the browser. 
+On the upper-left set of tabs, click on "Test" and then on "Load Test" to open up load test options in the browser. 
 
-![](<media/navigate_to_load_test_tab.png>)
+![](<media/shot1.png>)
 
 **2.** In the load test tab, create a simple load test in the browser. Click on the **New** button and select **URL-based test** to create a new URL-based test.
 
-![](<media/select_url_test.png>)
+![](<media/shot2.png>)
 
 **3.** Name the load test *PartsUnlimitedMRP Homepage Load Test*. Specify the home page URL, which should be the URL to MRP with your virtual machine name and port (such as *http://{mycloudhostname}.cloudapp.net:9080/mrp*).
 
-![](<media/point_to_mrp_url.png>)
+![](<media/shot3.png>)
 
 **4.** Select the **Settings** tab and change the **Run duration** to 1 minute. You can optionally change the max virtual users, browser mix, and load location as well. Then click the **Save** button.
 
-![](<media/change_run_duration.png>)
+![](<media/shot4.png>)
 
 **Step 4.** Click on the **Run test** button to begin the test. The load test will start running and show metrics in real time. 
 
 ![](<media/run_test.png>)
 
 **Step 5.** When the test has finished loading, it will show metrics, errors, and application performance. We should be able to solve this issue by creating an availability set for the virtual machines and configuring auto-scaling.
-![](<media/view_test_results.png>)
+
+![](<media/shot5.png>)
 
 ###Task 2: Creating virtual machines with Azure CLI
 Before configuring auto-scaling, we need to create a virtual machine and add it to an availability set. We can use Azure Command Line tools on our Linux machine to create a virtual machine and availability set. 
@@ -148,7 +149,7 @@ We now have two virtual machines in an availability set that scales by CPU so th
 
 On the upper-left set of tabs, click on "Load test" to open up load test options in the browser. 
 
-![](<media/navigate_to_load_test_tab.png>)
+![](<media/shot1.png>)
 
 **2.** Select the Load Test previously created in Task 1, then click on the **Run test** button to begin the test. The load test will start running and show metrics in real time. 
 
