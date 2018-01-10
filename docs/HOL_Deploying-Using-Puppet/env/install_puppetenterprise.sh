@@ -11,7 +11,7 @@ pe_version=$1
 console_pw=$2
 
 # Configure for Puppet Enterprise version
-pe_url=https://pm.puppetlabs.com/puppet-enterprise/2017.1.0/puppet-enterprise-2017.1.0-ubuntu-12.04-amd64.tar.gz
+pe_url=https://pm.puppetlabs.com/puppet-enterprise/2017.1.0/puppet-enterprise-2017.1.0-ubuntu-16.04-amd64.tar.gz
 
 
 # Set up variables
