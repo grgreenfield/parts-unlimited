@@ -55,19 +55,18 @@ though _puppet programs_ on the Puppet Master.
     and password and unique name for both machines. The Puppet Master will be a Standard D2_V2 while the partsmrp machine
     will be a Standard A2.
 
-    ![](<media/1.jpg>)
+    ![](<media/shot1.png>)
+    ![](<media/shot2.png>)
 
     Make sure you make a note of the region as well as the usernames and passwords for the machines. Allow
     about 10 minutes for deployment and then another 10 minutes for the Puppet Master to configure Puppet. 
 
 1. Check the Resource Group in the Azure Portal
     When the deployment completes, you should see the following resources in the Azure Portal:
-
-    ![](<media/2.jpg>)
-
     Click on the "partspuppetmaster" Public IP Address. Then make a note of the DNS name:
 
-    ![](<media/3.jpg>)
+    ![](<media/shot3.png>)
+    ![](<media/shot4.png>)
 
     The _dnsaddress_ will be of the form _machinename_._region_.cloudapp.azure.com. Open a browser to https://_dnsaddress_.
     (Make sure you're going to http__s__, not http). You will be prompted about an invalid certificate - it is safe to
@@ -182,7 +181,7 @@ in `/etc/puppetlabs/code/environments/production`.
     to template a module:
 
     ```sh
-    cd /etc/puppetlabs/puppet/environments/production/modules
+    cd /etc/puppetlabs/code/environments/production/modules
     sudo puppet module generate partsunlimited-mrpapp
     ```
 
