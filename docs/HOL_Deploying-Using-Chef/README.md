@@ -18,9 +18,9 @@ Active Azure Subscription
 
 ###Tasks Overview###
 
-**Provision the Lab:** This step walks you through how to set up the Chef set of machines with an ARM template. 
+**Provision the Lab:** This step walks you through how to set up a Chef Automate machine and client with an ARM template. 
 
-**Configure the Chef Workstation:** You will learn how to set up the Chef Starter Kit on the workstation.
+**Configure the Chef Workstation:** You will learn how to set up the Chef Starter Kit on your local workstation.
 
 **Create a Cookbook:** You will create an MRP cookbook and create a recipe for the MRP app's dependencies.
 
@@ -28,68 +28,45 @@ Active Azure Subscription
 
 **Bootstrap the MRP App Server and Deploy the Application:** You will bootstrap the MRP app and use the role that you previously created to deploy the app.
 
-**Remediating Configuration Changes:** You will see how Chef reacts when changes happen to the configuration and how Chef resolves issues. 
-
 ## Task 1: Provision the Lab
 
-1. This lab calls for the use of three machines:
-		The Chef server must be a Linux machine. 
-		The Chef workstation can run on Linux, Windows, or Mac. For this lab, the Chef Workstation will be on a Windows machine.
-		The MRP app server will be a Linux machine.  This machine will be configured and deployed to by Chef.
-
+1. This lab calls for the use of 2 virtual machines and your local one:
+		The Chef Automate which houses the chef server must be a Linux machine. 
+		The MRP app client will be a Linux machine.  This machine will be configured and deployed to by Chef.
+		The Chef workstation can run on Linux, Windows, or Mac. For this lab, we will us your local machine the one in this lab will be Windows.
     Instead of manually creating the VMs in Azure, we are going to use an Azure Resource Management (ARM) template.
     
-2. Simply click the Deploy to Azure button below and follow the wizard to deploy the two machines. You will need
+2. Simply click the Deploy to Azure button below and follow the wizard to deploy the Chef Automate machine. You will need
     to log in to the Azure Portal.
                                                                      
-	<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FPartsUnlimitedMRP%2Fmaster%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2FChefPartsUnlimitedMRP.json" target="_blank">
+	<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FPartsUnlimitedMRP%2Fmaster%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2Fdeploychef.json" target="_blank">
 		<img src="http://azuredeploy.net/deploybutton.png"/>
 	</a>
 	<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FPartsUnlimitedMRP%2Fmaster%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2FChefPartsUnlimitedMRP.json" target="_blank">
 		<img src="http://armviz.io/visualizebutton.png"/>
 	</a>
 
-    The VMs will be deployed to a Resource Group along with a virtual network (VNET) and some other required resources. You can 
-    delete the resource group in order to remove all the created resources at any time.
+    The VM will be deployed to a Resource Group along with a virtual network (VNET) and some other required resources. You can delete the resource group in order to remove all the created resources at any time.
 
 3. You will need to select a subscription and region to deploy the Resource Group to and to supply an admin username 
     and password and unique DNS name for all machines.
 
     ![](<media/specify_arm_settings.png>)
 
-    Make sure you make a note of the region as well as the usernames and passwords for the machines. Allow
+    Make sure you make a note of the region as well as the usernames and passwords for the machine. Allow
     about 10 minutes for deployment and then another 10 minutes for the Chef configuration. 
 
 4. When the deployment completes, you should see the following resources in the Azure Portal.
 
     ![](<media/resources_portal.png>)
 
-    >**Note:** The lab requires several ports to be open, such as the Chef Server port, the Chef web page port, and SSH
-    ports. The ARM template opens these ports on the machines for you.
-
-5. The Chef Workstation machine will be used to create cookbooks and trigger deployments.  It is a Windows machine so you can connect using Remote Desktop.
-
-    Click on the "chefworkstation" Public IP Address. Then make a note of the DNS name:
-
-    ![](<media/workstation_dns_portal.png>)
-
-	Connect to the machine with Remote Desktop and the username and password you set.
-
-	![](<media/remote_desktop.png>)
-
-6. From the Chef Workstation machine, log in to the Chef Manage web site (Please use Firefox or Chrome which are already installed on the machine).
+5.  Check that Chef Automate set up. (Please use Firefox or Chrome which are already installed on the machine).
 
     The _dnsaddress_ will be of the form _machinename_._region_.cloudapp.azure.com. Open a browser to https://_dnsaddress_.
     (Make sure you're going to http__s__, not http). You will be prompted about an invalid certificate - it is safe to
     ignore this for the purposes of this lab. If the Chef configuration has succeeded, you should see the Chef web page and enter the VM name:
 
     ![](<media/enter_vm_manage_workstation.png>)
-
-    Now go back to the Chef web page in your browser and enter the username and the password you set. 
-    When you log in, you should see a page like this:
-
-    ![](<media/log_in_manage_site.png>)
-
 
 ## Task 2: Configure the Chef Workstation
 In this exercise, you will configure your Chef Workstation.
@@ -100,7 +77,7 @@ In this exercise, you will configure your Chef Workstation.
 	The chef verify command returned errors that git was not configured with your identity information.
 	Proceed with step 2 to configure your identify information in git.
 
-2. Configure your global git variables with your name and email address
+2. Configure your global git variables with your name and email address if you haven't already.
 
     	git config --global user.name “YourName”
 		git config --global user.email “you@yourdomain.com”
@@ -109,13 +86,15 @@ In this exercise, you will configure your Chef Workstation.
 
 	Run `chef verify` again to ensure no further errors exist.
 
-3. Go back to the Chef Manage website, go to the Administration tab, then select the partsunlimited organization. Click on the Starter Kit on the left, then **Download Starter Kit**.
+3. Now you will need to get chef starter kit for accessing Chef Automate. To get to the starter kit you will need to access the chef vm with the following path https://<dns_label>.<location>.cloudapp.azure.com/biscotti/setup 
 
 	![](<media/download_starter_kit.png>)
 
+Fill in the required details like above. Then once you have agreed to the terms and conditions you will be taken through to a page where the starter kit will automatically download.  
+
 4. Extract the Chef starter kit files to a directory like `C:\Users\<username>\chef\`.
 
-5. Open the knife.rb file in chef-repo\.chef and change the chef_server_url to the external FQDN (e.g. https://<chef-server-dns-name>.<region>.cloudapp.azure.com/organizations/partsunlimited). Then, save and close the file.
+5. Open the knife.rb file in chef-repo\.chef and check that the chef_server_url to the external FQDN (e.g. https://<chef-server-dns-name>.<region>.cloudapp.azure.com/organizations/partsunlimited). Then, save and close the file.
 
 	![](<media/change_chef_url.png>)
 
@@ -151,9 +130,9 @@ In this exercise, you will configure your Chef Workstation.
 ## Task 3: Create a Cookbook
 In this exercise, you will create a cookbook to automate the installation of the MRP application and upload it to the Chef server.
 
-1. Use the knife tool to generate a cookbook template. 
+1. Cd into the cookbook file then use the knife tool to generate a cookbook template. 
 
-    	knife cookbook create mrpapp
+    	chef generate cookbook mrpapp
 
  	A cookbook is a set of tasks for configuring an application or feature. It defines a scenario and everything required to support that scenario. Within a cookbook, there are a series of recipes that define a set of actions to perform. Cookbooks and recipes are written in the Ruby language.
 
@@ -353,72 +332,62 @@ In this exercise, you will create a cookbook to automate the installation of the
 	Now that we have a recipe created and all of the dependencies installed, we can upload our cookbooks and recipes to the Chef server with the knife upload command.
 
 ## Task 4: Create a Role
-In this exercise, you will use the Chef Manage web site to create a role to define a baseline set of cookbooks and attributes that can be applied to multiple servers. 
+In this exercise, you will use knife to create a role to define a baseline set of cookbooks and attributes that can be applied to multiple servers. 
 
 At the start of this task, you should be logged in to the Chef Manage web site. 
 
-1. Click on the "Policy" tab. Then, click on the "Roles" tab and then "Create."
+1. You will need to add *knife[:editor] = "notepad"* to the knife.rb in C:\Users\GregG\parts\chef-repo\.chef as this will give you a notepad when creating the role.
 
-	![](<media/policy_tab.png>) 
+2. In the chef development kit console you will need to enter the following:
 
-2. Enter the role name *mrp* then the "Next" button.
+	knife role create partsrole
 
-	![](<media/enter_role_name.png>)
+3. This will open a notepad where you will need to change the default_attributes to:
 
-3. Under **Available Recipes**, find the *mrpapp* recipe.
-
-	A run list is a series of recipes to apply. We're defining a role that can be applied to as many servers as we want that will run the MRP application.
-
-	Drag the *mrpapp* recipe to the **Current Run List** box.
-
-	![](<media/add_mrp_run_list.png>)
-
-4. Repeat for the **chef-client::service** recipe.
-
-	![](<media/add_chefclient_run_list.png>)
-
-	The run list should be:
-    
-		mrpapp
-		chef-client::service
-
-	Click **Next**.
-
-5. In the **Default Attributes** box, paste the text: 
-
-    	{
-      	   "tomcat": {
-    			"mrp_port": 9080
-      		}
+	"default_attributes": {
+   		"tomcat": {
+      		"mrp_port": 9080
     	}
+	},
 
-	![](<media/add_default_attributes.png>)
+4. Update the override_attributes to:
 
-	In the previous exercise, we referenced an attribute called `['tomcat']['mrp_port']` in our recipe. This was referencing a JSON object. Now we can define default values to provide.
+	"override_attributes": {
+		"chef_client": {
+      		"interval": "60",
+      		"splay": "1"
+    	}
+  	},
 
-	Click **Next**.
+5. Update the run_list to:
 
-6. Paste the following JSON in the **Override Attributes** box:
+  	"run_list": [
+    	"recipe[mrpapp]",
+    	"recipe[chef-client::service]"
+  	],
 
-    	{
-           "chef_client": {
-    	       "interval": "60",
-    	       "splay": "1"
-           }
-        }
+After you finished save and exit which in the console should give you validation being.
 
-	![](<media/add_override_attributes.png>)
-
-	The second recipe we added to the run list was chef-client:: service. This recipe ensure that the Chef client will run on a regular basis to ensure that the environment is in sync with what is defined in our recipe. However, the default value for the chef client service is to sync every 30 minutes. We can override that value here and set it to a more frequent interval.
-
-	Then, click **Create Role**.
+	Created role[partsrole]
 
 ###Task 5: Bootstrap the MRP App Server and Deploy the Application
 In this exercise, you will run the knife command to bootstrap the MRP app server and assign the MRP application role.
 
-1. Use knife to boostrap the VM: 
+1. You will need to create a linux vm by selecting the below you can do it automatically.
 
-		knife bootstrap <FQDN-for-MRP-App-VM> --ssh-user <mrp-app-admin-username> --ssh-password <mrp-app-admin-password> --node-name mrp-app --run-list role[mrp] --sudo --verbose
+	<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FPartsUnlimitedMRP%2Fmaster%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2deploylinux.json" target="_blank">
+		<img src="http://azuredeploy.net/deploybutton.png"/>
+	</a>
+
+2. Fill in with the following details. 
+
+	adminUsername: azureuser
+	adminPassword: *************
+	dnsLabelPrefix: appmrpparts
+
+3. Once this is deployed use knife to boostrap the VM: 
+
+		knife --% bootstrap <FQDN-for-MRP-App-VM> --ssh-user <mrp-app-admin-username> --ssh-password <mrp-app-admin-password> --node-name mrp-app --run-list role[partsrole] --sudo --verbose
 
 	![](<media/knife_bootstrap.png>)
 
@@ -428,49 +397,16 @@ In this exercise, you will run the knife command to bootstrap the MRP app server
 
 	Once the deployment is complete, you should be able to navigate to the MRP application website and use it normally.
 
-2. Open the URL you chose for your public DNS name in a browser. The URL should be something like `http://<mrp-dns-name>.<region>.cloudapp.azure.com:9080/mrp.`
+	If there is an error with resolving the run list you will need to run:
+		
+		knife node run_list add mrp-app 'role[partsrole]'
+
+	As this will make sure the missing role is in the node.
+
+4. Open the URL you chose for your public DNS name in a browser. The URL should be something like `http://<mrp-dns-name>.<region>.cloudapp.azure.com:9080/mrp.`
 
 	![](<media/mrp_webpage.png>)
 
-3. Click around the site and observe that it functions normally.
-
-## Task 6: Remediating Configuration Changes
-
-In this exercise, you will make a change to the configuration of your MRP application server, then observe as Chef automatically corrects the issue.
-
-1. Start PuTTY.exe (which has already been installed on the Chef workstation) and enter the host name of the MRP application server. Then click **Open**.
-
-	![](<media/start_putty.png>) 
-
-	Click Yes to cache the server host key.
-
-2. When prompted for a user name, enter the MRP admin username and press **Enter**.
-
-	![](<media/login_through_putty.png>)
-
-	When prompted for a password, enter the MRP admin password and press **Enter**.
-	
-	Wait for the command prompt to appear.
-
-3. In PuTTY on the MRP Server, execute the following command to stop the Tomcat service:
-
-    	↪	sudo service tomcat7 stop
-
-4. In your browser, refresh the MRP app tab and observe that it is no longer accessible. 
-
-5. Go to the Chef Manage web site and click on the **Reports** tab. 
-This will take you to the dashboard where you can see statistics about your deployments.
-
-	Click **Run History**.
-
-	Observe that the node has a first successful run that executed 25/51 resources, and possibly additional runs that executed 0/35 resources. This is because the chef client installed on the server runs every 60 seconds and checks for environmental discrepancies. 
-
-	![](<media/reports_tab.png>)
-
-6. Click on the run that shows 1/35 resources executed. In the Details tab, it shows that the action executed was starting tomcat7.
-
-	![](<media/report_details_tab.png>)
-
-7. Reload the MRP application site, and you should see the site successfully load.
+5. Click around the site and observe that it functions normally.
 
 In this hands-on lab you explored some of the new features and capabilities of Deploying MRP App via Chef Server in Azure. This hands-on lab was designed to point out new features, discuss and describe them, and enable you to understand and explain these features to customers as part of the DevOps Lifecycle.
