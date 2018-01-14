@@ -39,7 +39,7 @@ Active Azure Subscription
 2. Simply click the Deploy to Azure button below and follow the wizard to deploy the Chef Automate machine. You will need
     to log in to the Azure Portal.
                                                                      
-	<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FPartsUnlimitedMRP%2Fmaster%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2Fdeploychef.json" target="_blank">
+	<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgrgreenfield%2Funlimited%2Fnew%2FCD-Updates%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2Fdeploychef.json" target="_blank">
 		<img src="http://azuredeploy.net/deploybutton.png"/>
 	</a>
 	<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FPartsUnlimitedMRP%2Fmaster%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2FChefPartsUnlimitedMRP.json" target="_blank">
@@ -375,7 +375,7 @@ In this exercise, you will run the knife command to bootstrap the MRP app server
 
 1. You will need to create a linux vm by selecting the below you can do it automatically.
 
-	<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FPartsUnlimitedMRP%2Fmaster%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2deploylinux.json" target="_blank">
+	<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgrgreenfield%2Funlimited%2Fnew%2FCD-Updates%2Fdocs%2FHOL_Deploying-Using-Chef%2Fenv%2Fdeploylinux.json" target="_blank">
 		<img src="http://azuredeploy.net/deploybutton.png"/>
 	</a>
 
