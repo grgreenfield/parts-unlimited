@@ -30,6 +30,7 @@ In this hands-on lab, you will explore some of the new features and capabilities
 
 **Remediating Configuration Changes:** You will see how Chef reacts when changes happen to the configuration and how Chef resolves issues. 
 
+
 ## Task 1: Provision the Lab
 
 1. This lab calls for the use of three machines:
@@ -167,6 +168,11 @@ In this exercise, you will create a cookbook to automate the installation of the
 
 {% highlight shell %}
     knife cookbook create mrpapp
+{% endhighlight %}
+
+You may be promoted to use the following command instead
+{% highlight shell %}
+chef generate cookbook mrpapp 
 {% endhighlight %}
 
 A cookbook is a set of tasks for configuring an application or feature. It defines a scenario and everything required to support that scenario. Within a cookbook, there are a series of recipes that define a set of actions to perform. Cookbooks and recipes are written in the Ruby language.

@@ -1,20 +1,15 @@
-# Please visit [http://aka.ms/pumrplabs](http://aka.ms/pumrplabs)
-
-We are now updating only the documentation here : [http://aka.ms/pumrplabs](http://aka.ms/pumrplabs)
-====================================================================================
-
 # HOL - Parts Unlimited MRP App Automated Testing with Visual Studio Team Services Build using the Eclipse IDE #
 
 In this lab, you will learn how to create new JUnit tests to the Parts Unlimited MRP App using the Eclipse IDE, and then get them to run in an automated build in Visual Studio Team Services. After finishing this lab, you will have added unit tests to the Parts Unlimited MRP App and have those tests running during build time.
 
-###Pre-requisites###
+### Pre-requisites ###
 
 - An active Visual Studio Team Services account
-- Eclipse ([http://www.eclipse.org/](http://www.eclipse.org/ "http://www.eclipse.org/"))
+- Eclipse ([http://www.eclipse.org/](http://www.eclipse.org/) tested on Oxygen IDE for Java Dev). You may have to install Java SDK as well, as prompted during eclipse installation.
 - Completion of the [Continuous Integration HOL](https://github.com/Microsoft/PartsUnlimitedMRP/tree/master/docs/HOL_Continuous-Integration)
 
 
-###Tasks Overview###
+### Tasks Overview ###
 
 **Set up the development environment:** This step will get your local environment set up to work on the Parts Unlimited MRP App. 
 
@@ -28,7 +23,7 @@ First, we need to set up Eclipse in order to work on the Parts Unlimited MRP App
 
 **1.** Open up **Eclipse**.
 
-**2.** Navigate to the application toolbar and select `Help -> Eclipse Marketplace`. Search for the [Gradle Buildship plugin](https://projects.eclipse.org/projects/tools.buildship). If the plugin is not installed already, install it and restart Eclipse. If the plugin is installed already, click on the **Installed** tab and select **Update** on the plugin if possible.
+**2.** Navigate to the application toolbar and select `Help -> Eclipse Marketplace`. Search for the [Gradle Buildship plugin](https://projects.eclipse.org/projects/tools.buildship). If the plugin is not installed already, install it and restart Eclipse. If the plugin is installed already, click on the **Installed** tab and select **Update** on the plugin if possible. On Eclipse Oxygen you should have the Buildship 2.0 by default, so you don't need to upgrade it.
 
 ![](media/find_buildship_plugin.png)
 
@@ -81,6 +76,8 @@ This will clone the repository to your local machine. You should be able to see 
 ![](media/new_integration_service.png)
 
 **14.** In the Package Explorer window, **right-click on IntegrationService** and then select **Configure -> Add Gradle Nature**.
+
+> **Note:** Allow network access when requested.
  
 ![](media/integration_to_gradle.png)
 
@@ -122,7 +119,7 @@ The development environment is now set up, and you should be ready to make write
 
 ![](media/gradle_build_console.png)
 
-###2. Add JUnit tests to Parts Unlimited MRP App###
+### 2. Add JUnit tests to Parts Unlimited MRP App ###
 
 This task will focus on creating a unit test to test a part of the Parts Unlimited App.
 
@@ -178,7 +175,7 @@ The final result should look something like this:
 
 You should now be able to see that the test in the JUnit Window.
 
-### 3. Run the automated tests in an automated build###
+### 3. Run the automated tests in an automated build ###
 
 Now that we have the automated tests written, and successfully running, it's important we push the new tests to the shared repository. This will allow other team members to benefit from the automated test and give the automated build more verification that our code is working as expected.
 

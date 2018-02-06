@@ -143,7 +143,13 @@ In this exercise, you will create a cookbook to automate the installation of the
 
     	chef generate cookbook mrpapp
 
+<<<<<<< HEAD
 A cookbook is a set of tasks for configuring an application or feature. It defines a scenario and everything required to support that scenario. Within a cookbook, there are a series of recipes that define a set of actions to perform. Cookbooks and recipes are written in the Ruby language.
+=======
+ 	You may also be prompted to use the command Chef generate cookbook mrpap
+
+	 A cookbook is a set of tasks for configuring an application or feature. It defines a scenario and everything required to support that scenario. Within a cookbook, there are a series of recipes that define a set of actions to perform. Cookbooks and recipes are written in the Ruby language.
+>>>>>>> master
 
 This creates an “mrpapp” directory in the chef-repo/cookbooks/ directory that contains all of the boilerplate code that defines a cookbook and a default recipe.
 
