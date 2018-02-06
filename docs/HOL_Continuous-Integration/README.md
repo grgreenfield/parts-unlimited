@@ -1,11 +1,3 @@
-# Please visit [http://aka.ms/pumrplabs](http://aka.ms/pumrplabs)
-
-We are now updating only the documentation here : [http://aka.ms/pumrplabs](http://aka.ms/pumrplabs)
-====================================================================================
-
-HOL - Parts Unlimited MRP App Continuous Integration with Visual Studio Team Services Build
-====================================================================================
-
 In this lab, we have an application called Parts Unlimited MRP. We want to set up
 Visual Studio Team Services to be able continuously integrate code into the master
 branch of code. This means that whenever code is committed and pushed to the

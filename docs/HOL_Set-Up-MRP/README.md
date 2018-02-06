@@ -1,8 +1,3 @@
-# Please visit [http://aka.ms/pumrplabs](http://aka.ms/pumrplabs)
-
-We are now updating only the documentation here : [http://aka.ms/pumrplabs](http://aka.ms/pumrplabs)
-====================================================================================
-
 HOL 0 - Set up Parts Unlimited MRP
 ====================================================================================
 
@@ -87,13 +82,13 @@ Next steps
 
 In this lab, you learned how to set up the PartsUnlimitedMRP team project in Visual Studio Team Services. Try these labs out for next steps:
 
--   [Parts Unlimited MRP Continuous Integration](https://github.com/Microsoft/PartsUnlimitedMRP/tree/master/docs/HOL_Continuous-Integration)
+-   [Parts Unlimited MRP Continuous Integration](../HOL_Continuous-Integration/README.md)
 
--   [Parts Unlimited MRP Continuous Deployment](https://github.com/Microsoft/PartsUnlimitedMRP/tree/master/docs/HOL_Continuous-Deployment)
+-   [Parts Unlimited MRP Continuous Deployment](../HOL_Continuous-Deployment/README.md)
 
--   [Parts Unlimited MRP Application Performance Monitoring](https://github.com/Microsoft/PartsUnlimitedMRP/tree/master/docs/HOL_Application-Performance-Monitoring)
+-   [Parts Unlimited MRP Application Performance Monitoring](../HOL_Application-Performance-Monitoring/README.md)
 
--	[Parts Unlimited MRP Auto-Scaling and Load Testing](https://github.com/Microsoft/PartsUnlimitedMRP/tree/master/docs/HOL_Autoscaling-Load-Testing)
+-	[Parts Unlimited MRP Auto-Scaling and Load Testing](../HOL_Autoscaling-Load-Testing/README.md)
 
 # Continuous Feedbacks
 
