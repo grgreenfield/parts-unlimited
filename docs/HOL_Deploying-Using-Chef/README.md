@@ -12,11 +12,11 @@ In this hands-on lab, you will explore some of the new features and capabilities
 You may watch a [demo in Channel 9](https://channel9.msdn.com/Series/Parts-Unlimited-MRP-Labs/Parts-Unlimited-MRP-App-Continuous-Deployment-with-Chef) that walks through many of the steps in the document.
 
 
-###Pre-requisites###
+### Pre-requisites ###
 
 Active Azure Subscription
 
-###Tasks Overview###
+### Tasks Overview ###
 
 **Provision the Lab:** This step walks you through how to set up a Chef Automate machine and client with an ARM template. 
 
@@ -143,13 +143,7 @@ In this exercise, you will create a cookbook to automate the installation of the
 
     	chef generate cookbook mrpapp
 
-<<<<<<< HEAD
 A cookbook is a set of tasks for configuring an application or feature. It defines a scenario and everything required to support that scenario. Within a cookbook, there are a series of recipes that define a set of actions to perform. Cookbooks and recipes are written in the Ruby language.
-=======
- 	You may also be prompted to use the command Chef generate cookbook mrpap
-
-	 A cookbook is a set of tasks for configuring an application or feature. It defines a scenario and everything required to support that scenario. Within a cookbook, there are a series of recipes that define a set of actions to perform. Cookbooks and recipes are written in the Ruby language.
->>>>>>> master
 
 This creates an “mrpapp” directory in the chef-repo/cookbooks/ directory that contains all of the boilerplate code that defines a cookbook and a default recipe.
 
@@ -385,7 +379,7 @@ In this exercise, you will use knife to create a role to define a baseline set o
 
 		Created role[partsrole]
 
-###Task 5: Bootstrap the MRP App Server and Deploy the Application
+## Task 5: Bootstrap the MRP App Server and Deploy the Application
 In this exercise, you will run the knife command to bootstrap the MRP app server and assign the MRP application role.
 
 1. You will need to create a linux vm by selecting the below you can do it automatically.
@@ -415,8 +409,7 @@ In this exercise, you will run the knife command to bootstrap the MRP app server
 	If there is an error with resolving the run list you will need to run:
 		
 		knife node run_list add mrp-app 'role[partsrole]'
-
-	![](<media/shot_10.png>)
+	
 	As this will make sure the missing role is in the node.
 
 4. Open the URL you chose for your public DNS name in a browser. The URL should be something like `http://<mrp-dns-name>.<region>.cloudapp.azure.com:9080/mrp.`
@@ -424,5 +417,50 @@ In this exercise, you will run the knife command to bootstrap the MRP app server
 	![](<media/mrp_webpage.png>)
 
 5. Click around the site and observe that it functions normally.
+
+## Task 6: Remediating Configuration Changes
+
+In this exercise, you will make a change to the configuration of your MRP application server, then observe as Chef automatically corrects the issue.
+
+1. Start PuTTY.exe (which has already been installed on the Chef workstation) and enter the host name of the MRP application server. Then click **Open**.
+
+	![](<media/start_putty.png>) 
+
+	Click Yes to cache the server host key.
+
+2. When prompted for a user name, enter the MRP admin username and press **Enter**.
+
+	![](<media/login_through_putty.png>)
+
+	When prompted for a password, enter the MRP admin password and press **Enter**.
+	
+	Wait for the command prompt to appear.
+
+3. You will need to install and configure `Chef Manager` on the server, by doing the following:
+
+	sudo chef-server-ctl install chef-manage
+	sudo chef-server-ctl reconfigure
+	sudo chef-manage-ctl reconfigure --accept-license
+
+3. In PuTTY on the MRP Server, execute the following command to stop the Tomcat service:
+
+    	↪	sudo service tomcat7 stop
+
+4. In your browser, refresh the MRP app tab and observe that it is no longer accessible. 
+
+5. Go to the Chef Manage web site by going to your server `https://<yourDNS>.eastus.cloudapp.azure.com/organizations/<yourOrganizationName>/` and click on the **Reports** tab. 
+This will take you to the dashboard where you can see statistics about your deployments.
+
+	Click **Run History**.
+
+	Observe that the node has a first successful run that executed 25/51 resources, and possibly additional runs that executed 0/35 resources. This is because the chef client installed on the server runs every 60 seconds and checks for environmental discrepancies. 
+
+	![](<media/reports_tab.png>)
+
+6. Click on the run that shows 1/35 resources executed. In the Details tab, it shows that the action executed was starting tomcat7.
+
+	![](<media/report_details_tab.png>)
+
+7. Reload the MRP application site, and you should see the site successfully load.
 
 In this hands-on lab you explored some of the new features and capabilities of Deploying MRP App via Chef Server in Azure. This hands-on lab was designed to point out new features, discuss and describe them, and enable you to understand and explain these features to customers as part of the DevOps Lifecycle.

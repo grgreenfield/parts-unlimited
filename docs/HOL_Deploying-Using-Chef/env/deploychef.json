@@ -28,13 +28,12 @@
             },
             "defaultValue": ""
         },
-        "diagnosticStorageAccountName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the storage account to use for diagnostics"
-            },
-            "defaultValue": "diagstoragename"
-        },
+      "diagnosticStorageAccountName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the storage account to use for diagnostics"
+        }
+      },
         "diagnosticStorageAccountNewOrExisting": {
             "type": "string",
             "metadata": {
@@ -84,13 +83,12 @@
             },
             "defaultValue": "East Us"
         },
-        "publicIPAddressName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name to give to the Public IP address of the machine"
-            },
-            "defaultValue": "partschefip"
-        },
+      "publicIPAddressName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name to give to the Public IP address of the machine"
+        }
+      },
         "publicIPAddressResourceGroup": {
             "type": "string",
             "metadata": {
@@ -125,13 +123,12 @@
             },
             "defaultValue": ""
         },
-        "storageAccountName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the storage account to use or created"
-            },
-            "defaultValue": "storageaccname"
-        },
+      "storageAccountName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the storage account to use or created"
+        }
+      },
         "storageAccountNewOrExisting": {
             "type": "string",
             "metadata": {
@@ -153,13 +150,12 @@
             },
             "defaultValue": ""
         },
-        "subnetName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the subnet to create within the virtual network"
-            },
-            "defaultValue": "partschefsubnet"
-        },
+      "subnetName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the subnet to create within the virtual network"
+        }
+      },
         "subnetPrefix": {
             "type": "string",
             "metadata": {
@@ -174,13 +170,12 @@
             },
             "defaultValue": "10.0.0.0/16"
         },
-        "virtualNetworkName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the virtual network to create or use"
-            },
-            "defaultValue": "partschefvnet"
-        },
+      "virtualNetworkName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the virtual network to create or use"
+        }
+      },
         "virtualNetworkNewOrExisting": {
             "type": "string",
             "metadata": {
@@ -195,13 +190,12 @@
             },
             "defaultValue": ""
         },
-        "vmName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the virtual machine in Azure, this will also be the hostname"
-            },
-            "defaultValue": "chefpartsvm"
-        },
+      "vmName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the virtual machine in Azure, this will also be the hostname"
+        }
+      },
         "vmSize": {
             "type": "string",
             "metadata": {
@@ -527,9 +521,9 @@
                     },
                     "osDisk": {
                         "name": "[parameters('vmName')]",
-                        "vhd": {
-                            "uri": "[concat(reference('StorageAccountSetup').outputs.blobEndpoint.value, 'vhds/', parameters('vmName'), uniquestring(Deployment().Name), '.vhd')]"
-                        },
+                      "vhd": {
+                        "uri": "[concat(reference('StorageAccountSetup').outputs.blobEndpoint.value, 'vhds/', parameters('vmName'),  uniqueString(resourceGroup().id), '.vhd')]"
+                      },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
                     }
